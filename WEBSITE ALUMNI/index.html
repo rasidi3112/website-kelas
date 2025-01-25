@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni XII RPL SMKN 1 PRAYA TENGAH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --card-background: #fff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.5s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --card-background: #34495e;
+        }
+        
+        .school-logo {
+    width: 100px; /* Sesuaikan ukuran */
+    height: auto;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 2em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2em auto;
+            padding: 2em;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1em;
+            margin-bottom: 2em;
+        }
+
+        .info-card {
+            background-color: var(--card-background);
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .alumni-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .alumni-item {
+            background-color: var(--card-background);
+            margin-bottom: 1em;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .alumni-item:hover {
+            transform: translateX(5px);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        #modeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            margin: 15% auto;
+            padding: 2em;
+            border-radius: 10px;
+            width: 50%;
+            max-width: 500px;
+            animation: modalOpen 0.5s;
+        }
+
+        @keyframes modalOpen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+    <div class="header-bg"></div>
+    <img src="logo.png" alt="Logo SMKN 1 Praya Tengah" class="school-logo">
+    <h1>Alumni XII RPL SMKN 1 PRAYA TENGAH</h1>
+</header>
+    
+    
+    <main>
+        <h2>Informasi Angkatan</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Tahun Lulus</h3>
+                <p id="tahunLulus">-</p>
+            </div>
+            <div class="info-card">
+                <h3>Jumlah Alumni</h3>
+                <p id="jumlahAlumni">-</p>
+            </div>
+            <div class="info-card">
+                <h3>Wali Kelas</h3>
+                <p id="waliKelas">-</p>
+            </div>
+        </div>
+        <button class="btn" onclick="showModal('infoModal')">Ubah Informasi</button>
+        
+        <h2>Daftar Alumni</h2>
+        <ul id="daftarAlumni" class="alumni-list"></ul>
+        <button class="btn" onclick="showModal('alumniModal')">Tambah Alumni</button>
+    </main>
+    <button id="modeToggle" class="btn" onclick="toggleMode()">Mode Gelap</button>
+
+    <!-- Modal Ubah Informasi -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal')">&times;</span>
+            <h2>Ubah Informasi Angkatan</h2>
+            <input type="text" id="inputTahunLulus" placeholder="Tahun Lulus">
+            <input type="text" id="inputJumlahAlumni" placeholder="Jumlah Alumni">
+            <input type="text" id="inputWaliKelas" placeholder="Wali Kelas">
+            <button class="btn" onclick="ubahInfo()">Simpan</button>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Alumni -->
+    <div id="alumniModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('alumniModal')">&times;</span>
+            <h2>Tambah Alumni</h2>
+            <input type="text" id="inputNamaAlumni" placeholder="Nama Alumni">
+            <select id="inputStatusAlumni">
+                <option value="">Pilih Status</option>
+                <option value="Kuliah">Kuliah</option>
+                <option value="Kerja">Kerja</option>
+                <option value="Wirausaha">Wirausaha</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+            <button class="btn" onclick="tambahAlumni()">Tambah</button>
+        </div>
+    </div>
+
+    <script>
+        let darkMode = false;
+        let daftarAlumni = [];
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function ubahInfo() {
+            const tahunLulus = document.getElementById("inputTahunLulus").value;
+            const jumlahAlumni = document.getElementById("inputJumlahAlumni").value;
+            const waliKelas = document.getElementById("inputWaliKelas").value;
+
+            document.getElementById("tahunLulus").textContent = tahunLulus;
+            document.getElementById("jumlahAlumni").textContent = jumlahAlumni;
+            document.getElementById("waliKelas").textContent = waliKelas;
+
+            closeModal('infoModal');
+        }
+
+        function tambahAlumni() {
+            const namaAlumni = document.getElementById("inputNamaAlumni").value;
+            const statusAlumni = document.getElementById("inputStatusAlumni").value;
+            if (namaAlumni && statusAlumni) {
+                daftarAlumni.push({nama: namaAlumni, status: statusAlumni});
+                updateDaftarAlumni();
+                closeModal('alumniModal');
+            }
+        }
+
+        function hapusAlumni(index) {
+            daftarAlumni.splice(index, 1);
+            updateDaftarAlumni();
+        }
+
+        function updateDaftarAlumni() {
+            const ul = document.getElementById("daftarAlumni");
+            ul.innerHTML = "";
+            daftarAlumni.forEach((alumni, index) => {
+                const li = document.createElement("li");
+                li.className = "alumni-item";
+                li.innerHTML = `
+                    <span>${alumni.nama} - ${alumni.status}</span>
+                    <button class="btn btn-delete" onclick="hapusAlumni(${index})">Hapus</button>
+                `;
+                ul.appendChild(li);
+            });
+        }
+
+        function toggleMode() {
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark-mode');
+            document.getElementById("modeToggle").textContent = darkMode ? "Mode Terang" : "Mode Gelap";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === "modal") {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
